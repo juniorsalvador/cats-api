@@ -4,19 +4,19 @@
 
 A soluçao a seguir tem como base a API Publica The Cats API https://thecatapi.com/, na qual é consumido os dados conforme a solicitação a seguir:
 
-a. Para cada uma das raças de gatos disponíveis, armazenar as informações de origem, temperamento e descrição em uma base de dados. (se disponível)  
-b. Para cada uma das raças acima, salvar o endereço de 3 imagens em uma base de dados. (se disponível)  
-c. Salvar o endereço de 3 imagens de gatos com chapéu.  
-d. Salvar o endereço de 3 imagens de gatos com óculos.
+- Para cada uma das raças de gatos disponíveis, armazenar as informações de origem, temperamento e descrição em uma base de dados. (se disponível)  
+-  Para cada uma das raças acima, salvar o endereço de 3 imagens em uma base de dados. (se disponível)  
+-  Salvar o endereço de 3 imagens de gatos com chapéu.  
+-  Salvar o endereço de 3 imagens de gatos com óculos.
 
 Todos os dados são commitados em um banco de dados local em formato de arquivo para posteriormente serem consumidos pela nova API.
 
 A API interna, aqui denominada de ```cat-api```, consome essa base de dados e tem em si, as seguintes capacidades:
 
-a. listar todas as raças
-b. listar as informações de uma raça
-c. a partir de um temperamento listar as raças
-d. a partir de uma origem listar as raças
+- listar todas as raças
+- listar as informações de uma raça
+- A partir de um temperamento listar as raças
+- A partir de uma origem listar as raças
 
 Todos os metodos dessa API expõe metricas de execução para o **Prometheus**, assim como tambem gera os logs, onde há um agent do **promtail** escutando o arquivo e enviando para o **Grafana Loki**. 
 
@@ -31,6 +31,8 @@ Existe uma peça a parte para execução da carga para testar a API gerando metr
 Seguem um diagrama basico da soluçao
 
 ![diagrama basico](images/cat-api_arq.png)
+
+---
 
 # Ferramentas e serviços utilizados
 
@@ -51,6 +53,7 @@ Grafana da API = [Dashbord - Cat Api](http://<IP>:8000/)
 
 Grafana do teste de carga = [Dashbord - Prometheus K6]( https://jrlabs.grafana.net/d/ccbb2351-2ae2-462f-ae0e-f2c893ad1028/k6-prometheus?orgId=1&from=now-3h&to=now&timezone=browser&var-DS_PROMETHEUS=&var-testid=&var-quantile_stat=&var-adhoc_filter=)
 
+---
 
 # Documentaçao da API
 
@@ -63,7 +66,6 @@ Grafana do teste de carga = [Dashbord - Prometheus K6]( https://jrlabs.grafana.n
 1. Listar Todas as Raças
 
     - **GET** ```/breeds```
-
     - **Descrição:** Retorna todas as raças de gatos disponíveis
 
 Exemplo de sucesso:
@@ -83,7 +85,6 @@ Exemplo de sucesso:
 2. Obter Raça por ID
 
     - **GET** ```/breeds/{breed_id}```
-
     - **Parâmetros**:
 
         breed_id: ID da raça (ex: "*beng*")
@@ -103,7 +104,6 @@ Exemplo de sucesso:
 3. Buscar por Temperamento
 
     - **GET** ```/breeds/by-temperament/{temperament}```
-
     - **Parâmetros**:
 
         temperament: Traço de personalidade (ex: "*Agile*")
@@ -122,7 +122,6 @@ Exemplo de sucesso:
 4. Buscar por Origem
 
     - **GET** ```/breeds/by-origin/{origin}```
-
     - **Parâmetros**:
 
         origin: País de origem (ex: "U*nited States*")
@@ -157,6 +156,7 @@ Exemplo de sucesso:
     **Descrição:** Endpoint para coleta de métricas pelo Prometheus
 
 
+---
 
 # Como executar no ambiente local
 
