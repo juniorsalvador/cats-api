@@ -63,7 +63,7 @@ Grafana do teste de carga = [Dashbord - Prometheus K6]( https://jrlabs.grafana.n
 
 ## Principais Endpoints
 
-1. Listar Todas as Raças
+1. **Listar Todas as Raças**
 
     - **GET** ```/breeds```
     - **Descrição:** Retorna todas as raças de gatos disponíveis
@@ -82,7 +82,7 @@ Exemplo de sucesso:
 ]
 ```
 
-2. Obter Raça por ID
+2. **Obter Raça por ID**
 
     - **GET** ```/breeds/{breed_id}```
     - **Parâmetros**:
@@ -101,7 +101,7 @@ Exemplo de sucesso:
 
 ```
 
-3. Buscar por Temperamento
+3. **Buscar por Temperamento**
 
     - **GET** ```/breeds/by-temperament/{temperament}```
     - **Parâmetros**:
@@ -119,7 +119,7 @@ Exemplo de sucesso:
 ]
 ```
 
-4. Buscar por Origem
+4. **Buscar por Origem**
 
     - **GET** ```/breeds/by-origin/{origin}```
     - **Parâmetros**:
@@ -137,7 +137,7 @@ Exemplo de sucesso:
 ]
 ```
 
-5. Health Check
+5. **Health Check**
 
     - **GET** ```/health```
 
@@ -149,11 +149,15 @@ Exemplo de sucesso:
 }
 ```
 
-6. Métricas Prometheus
+6. **Métricas Prometheus**
 
-    - GET ```/metrics```
+    - **GET** /metrics
 
     **Descrição:** Endpoint para coleta de métricas pelo Prometheus
+
+
+# Prints dos pontos de Observabildiade
+
 
 
 ---
@@ -177,3 +181,56 @@ docker-compose up -d
 Aguarde todos os serviços ficarem com o status **UP**
 Exemplo:
 ![Services UP](images/docker-services-up.png)
+
+
+Tudo executado com sucesso, as URL's devem ser:
+
+Endpoint api = ```http://localhost:8000/```
+
+Grafana = [http://localhost:3000](http://localhost:3000/)
+user=admin
+password=admin
+
+Na arvore de diretorio do ```grafana/provisioning``` há dois diretorios:
+- **dashboard/**
+  Arquivo json com o template do dashboard usado.
+- **datasources/**
+  arquivo ```.yml``` para a configuracao do datasource do **loki** e **prometheus**
+
+---
+
+# Testes com carga
+
+No diretorio de test, há um arquivo chamado ```load_test.js```, esse script em javascript foi desenvolvido para gerar uma carga na API para podermos vermos o seu funcionamento e observar seu comportamento pelo grafana.
+
+O componente responsavel pela sua execução é o Grafana K6.
+
+Caso nao tenha o K6 instalado, pode-se instalar dessa forma para Macos e Windows
+
+**Windows**
+  
+- Acesse: https://grafana.com/grafana/download?platform=windows&product=k6
+- Baixe o arquivo .zip para Windows.
+- Extraia o conteúdo em uma pasta de sua preferência.
+- Adicione o caminho da pasta extraída à variável de ambiente PATH para usar o comando k6 no terminal (Prompt de Comando ou PowerShell).
+
+Depois disso, você pode rodar k6 version para verificar se a instalação foi concluída com sucesso.
+
+**MacOs**
+
+```bash
+brew install k6
+```
+
+Crie as seguintes variaveis de ambiente:
+```bash
+export K6_PROMETHEUS_RW_SERVER_URL=https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
+export K6_PROMETHEUS_RW_USERNAME=1234107
+export K6_PROMETHEUS_RW_PASSWORD=glc_eyJvIjoiMjEyMDQ5IiwibiI6InN0YWNrLTc2MzEyOS1obS13cml0ZS1jYXNlX2l0YXUiLCJrIjoiTzhhMmZ1VDEyNjNrWlhpMDg3cjhCQndHIiwibSI6eyJyIjoicHJvZC11cy1lYXN0LTAifX0=
+```
+
+A partir do diretorio ```tests```, execute:
+
+```bash
+k6 run load_test.js  -o experimental-prometheus-rw
+```

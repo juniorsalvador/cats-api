@@ -1,0 +1,6 @@
+*.log
+nada.txt
+*.db
+__pycache__/
+pyproject.toml
+*.DS_Store
