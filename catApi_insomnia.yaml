@@ -1,0 +1,171 @@
+type: collection.insomnia.rest/5.0
+name: CatAPI
+meta:
+  id: wrk_600314b3ed73413ab9271164ed089014
+  created: 1750374727858
+  modified: 1750374727858
+  description: ""
+collection:
+  - name: CatAPI
+    meta:
+      id: fld_bc459d52862a4f2e8d913ba1efc09f12
+      created: 1750374727865
+      modified: 1750375611309
+      sortKey: -1750374721329
+      description: API para informações sobre raças de gatos para um Case
+    children:
+      - name: cat-api
+        meta:
+          id: fld_2b74f4bdc696465fb82a3b8e2d61234b
+          created: 1750374727878
+          modified: 1750374727878
+          sortKey: -1750374721328
+          description: ""
+        children:
+          - url: "{{baseUrl}}/breeds"
+            name: /breeds
+            meta:
+              id: req_e6053b0dc40d42d1896a7a2594c3355e
+              created: 1750374727879
+              modified: 1750374817707
+              isPrivate: false
+              description: |-
+                Lista todas as raças de gatos disponíveis.
+                Retorna id, nome, origem, temperamento e descrição de cada raça.
+              sortKey: -1750374721327
+            method: GET
+            headers:
+              - name: Accept
+                value: application/json
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/breeds/:breed_id"
+            name: /breeds/breeds_id
+            meta:
+              id: req_c5885db91a2d4123a5e851f4ca4c1fbe
+              created: 1750374727882
+              modified: 1750375618517
+              isPrivate: false
+              description: Obtém informações detalhadas sobre uma raça específica.
+              sortKey: -1750374721326
+            method: GET
+            headers:
+              - name: Accept
+                value: application/json
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_['baseUrl']}}/breeds/by-temperament/:temperament"
+            name: /breeds/by-temperament/:temperament
+            meta:
+              id: req_f09b78e584f04577ad642f1146ac0168
+              created: 1750374727882
+              modified: 1750374727882
+              isPrivate: false
+              description: |-
+                Lista raças de gatos que possuem o temperamento especificado.
+                A busca é case-insensitive e parcial.
+              sortKey: -1750374721325
+            method: GET
+            headers:
+              - name: Accept
+                value: application/json
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_['baseUrl']}}/breeds/by-origin/:origin"
+            name: /breeds/by-origin/:origin
+            meta:
+              id: req_a27bcdf019e4486cab0b9bf88aa7aed8
+              created: 1750374727883
+              modified: 1750374727883
+              isPrivate: false
+              description: |-
+                Lista raças de gatos que são originárias do local especificado.
+                A busca é case-insensitive e parcial.
+              sortKey: -1750374721324
+            method: GET
+            headers:
+              - name: Accept
+                value: application/json
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        scripts:
+          afterResponse: ""
+          preRequest: ""
+      - url: "{{baseUrl}}/health"
+        name: /health
+        meta:
+          id: req_7ba754745bf348b5948bdfb7d0df6eb8
+          created: 1750374727884
+          modified: 1750374727884
+          isPrivate: false
+          description: Verifica o status da API
+          sortKey: -1750374721323
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
+    environment:
+      baseUrl: http://3.20.164.233:8000
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_0a59ee334c683d2e45dcdcfc9ed23fd3442ebe4e
+    created: 1750374729733
+    modified: 1750374729733
+environments:
+  name: Base Environment
+  meta:
+    id: env_0a59ee334c683d2e45dcdcfc9ed23fd3442ebe4e
+    created: 1750374729731
+    modified: 1750374729731
+    isPrivate: false

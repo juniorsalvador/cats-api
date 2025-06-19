@@ -37,19 +37,26 @@ Seguem um diagrama basico da soluçao
 # Ferramentas e serviços utilizados
 
 
-**Linguagem.:** Python com FastAPI e bash
-**Database.:** Sqlite3
-**API Publica.:** The Cats API
-**Container.:** Docker / docker-compose
-**Metricas.:** Prometheus
-**Logs.:** Loki
-**Visualizaçao.:** Grafana
-**Gerador de carga.:** Grafana K6
+- **Linguagem.:** Python com FastAPI e bash
+
+- **Database.:** Sqlite3
+
+- **API Publica.:** The Cats API
+
+- **Container.:** Docker / docker-compose
+
+- **Metricas.:** Prometheus
+
+- **Logs.:** Loki
+
+- **Visualizaçao.:** Grafana
+
+- **Gerador de carga.:** Grafana K6
 
 ## Acessos ao serviço cat-api
 
-Endpoint API = [http://IP:8000/](http://<IP>:8000/)
-Grafana da API = [Dashbord - Cat Api](http://<IP>:8000/)
+Endpoint API = [http://3.20.164.233:8000/](http://<IP>:8000/)
+Grafana da API = [Dashbord - Cat Api](http://3.20.164.233:3000/)
 
 Grafana do teste de carga = [Dashbord - Prometheus K6]( https://jrlabs.grafana.net/d/ccbb2351-2ae2-462f-ae0e-f2c893ad1028/k6-prometheus?orgId=1&from=now-3h&to=now&timezone=browser&var-DS_PROMETHEUS=&var-testid=&var-quantile_stat=&var-adhoc_filter=)
 
@@ -156,6 +163,15 @@ Exemplo de sucesso:
     **Descrição:** Endpoint para coleta de métricas pelo Prometheus
 
 
+### Collection para o Insomnia
+
+[Baixar coleção Insomnia (catApi_insomnia.yaml)](catApi_insomnia.yaml)
+
+Basta importar no insomnia do seu ambiente.
+
+---
+
+
 # Prints dos pontos de Observabildiade
 
 
@@ -180,6 +196,13 @@ docker-compose up -d
 
 Aguarde todos os serviços ficarem com o status **UP**
 Exemplo:
+execute:
+```bash
+docker ps
+```
+
+A Saida do comando deve ser algo parecido com essa imagem:
+
 ![Services UP](images/docker-services-up.png)
 
 
@@ -202,6 +225,35 @@ Na arvore de diretorio do ```grafana/provisioning``` há dois diretorios:
 # Testes com carga
 
 No diretorio de test, há um arquivo chamado ```load_test.js```, esse script em javascript foi desenvolvido para gerar uma carga na API para podermos vermos o seu funcionamento e observar seu comportamento pelo grafana.
+
+Pode-se alterar os parametros do teste, porem nesse momento infelizmente tem de ser direto no script js, aqui encontra um ponto de melhoria para tirar do script esses parametros. Para isso altere o trecho do codigo abaixo:
+
+```javascript
+export const options = {
+  stages: [
+    { duration: '2m', target: 25 },  // Ramp up para 25 usuários em 5 minutos
+    { duration: '3m', target: 50 }, // Ramp up para 50 usuários
+    { duration: '3m', target: 100 }, // Ramp up para 100 usuários
+    { duration: '3m', target: 150 }, // Ramp up para 150 usuários
+    { duration: '3m', target: 200 }, // Pico de 200 usuários
+    { duration: '3m', target: 0 },   // Ramp down gradual
+  ],
+  thresholds: {
+    http_req_failed: ['rate<0.01'],  // Menos de 1% de falhas
+    http_req_duration: ['p(95)<500'], // 95% das requisições abaixo de 500ms
+  },
+  ext: {
+    loadimpact: {
+      projectID: 12345,
+      name: 'Cat API load Test'
+    }
+  }
+};
+```
+
+> **ℹ️ Info:** 
+> Dependendo do cenario que a API foi feito o deploy, pode haver uma contançao das requesiçoes, logo não ajuda muito aumentar os valores dos parametros. Nesse caso, eu obtive status 429 do prometheus(modo remote-write) que estou usando no grafana cloud, em alguns momentos no teste eu atingi o rate limit dessa minha conta que é free.
+
 
 O componente responsavel pela sua execução é o Grafana K6.
 
@@ -233,4 +285,10 @@ A partir do diretorio ```tests```, execute:
 
 ```bash
 k6 run load_test.js  -o experimental-prometheus-rw
+```
+
+caso queira tambem ver um report local com um dashboard bem bacana, pode executar dessa forma abaixo, passando ```K6_WEB_DASHBOARD=true``` que ele vai jogar no saida do comando a URL local para acessa-lo.
+
+```bash
+K6_WEB_DASHBOARD=true k6 run load_test.js  -o experimental-prometheus-rw
 ```
