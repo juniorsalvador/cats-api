@@ -1,9 +1,8 @@
-# CAT-API - Case Itau
+**CAT-API - Case Itau**
+---
 
-# Sumário
+**Sumário**
 
-- [CAT-API - Case Itau](#cat-api---case-itau)
-- [Sumário](#sumário)
 - [Introduçao](#introduçao)
 - [Arquitetura](#arquitetura)
 - [Ferramentas e serviços utilizados](#ferramentas-e-serviços-utilizados)
@@ -14,7 +13,6 @@
 - [Prints dos pontos de Observabildiade](#prints-dos-pontos-de-observabildiade)
 - [Como executar no ambiente local](#como-executar-no-ambiente-local)
 - [Testes com carga](#testes-com-carga)
-  - [Normalmente o report fica em ```http://127.0.0.1:5665/```](#normalmente-o-report-fica-em-http1270015665)
 
 
 # Introduçao
@@ -54,7 +52,7 @@ Seguem um diagrama basico da soluçao
 # Ferramentas e serviços utilizados
 
 
-- **Linguagem.:** Python com FastAPI e bash
+- **Linguagem.:** Python com FastAPI, javascript e bash
 
 - **Database.:** Sqlite3
 
@@ -316,4 +314,11 @@ K6_WEB_DASHBOARD=true k6 run load_test.js  -o experimental-prometheus-rw
 ```
 
 Normalmente o report fica em ```http://127.0.0.1:5665/```
+
+Segue uns prints do resultado de uma execução por gerado pelo K6 e seu report proprio por esse URL
+
+![pagina 1](images/k6_page1.png)
+![pagina 2](images/k6_page2.png)
+![pagina 3](images/k6_page3.png)
+
 ---
