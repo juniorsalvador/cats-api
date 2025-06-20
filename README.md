@@ -56,6 +56,7 @@ Seguem um diagrama basico da soluçao
 ## Acessos ao serviço cat-api
 
 Endpoint API = [http://3.20.164.233:8000/](http://<IP>:8000/)
+
 Grafana da API = [Dashbord - Cat Api](http://3.20.164.233:3000/)
 
 Grafana do teste de carga = [Dashbord - Prometheus K6]( https://jrlabs.grafana.net/d/ccbb2351-2ae2-462f-ae0e-f2c893ad1028/k6-prometheus?orgId=1&from=now-3h&to=now&timezone=browser&var-DS_PROMETHEUS=&var-testid=&var-quantile_stat=&var-adhoc_filter=)
@@ -176,10 +177,9 @@ Basta importar no insomnia do seu ambiente.
 
 Aqui uns prints do grafana no que tange a observabilidade(ainda que basica) da api
 
-![parte 1](gr_observabilidade1.png)
+![parte 1](images/gr_observabilidade1.png)
 
-![parte 2](gr_observabilidade2.png)
-
+![parte 2](images/gr_observabilidade2.png)
 
 ---
 
