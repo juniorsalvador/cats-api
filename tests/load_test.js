@@ -36,8 +36,8 @@ const breedIds = [
   'amau', // Arabian Mau
   'amis', // Australian Mist
   'bali', // Balinese
-  'bamb'  // Bambino
-
+  'bamb',  // Bambino
+  'xyzo'  // para falhar
 ];
 
 // Função para gerar temperamentos aleatórios
@@ -48,7 +48,8 @@ const temperaments = [
   'Gentle',
   'Social',
   'Loyal',
-  'Curious'
+  'Curious',
+  'tristonho' // para falhar
 ];
 
 // Função para gerar origens aleatórias
