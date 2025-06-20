@@ -13,7 +13,7 @@ services:
     command: sh -c "pip install --upgrade pip && pip install prometheus_client urllib3==1.26.6 requests fastapi uvicorn prometheus-client && python worker.py && uvicorn cat_api:app --host 0.0.0.0 --port 8000"
     environment:
       - LOG_LEVEL=INFO
-      - CAT_API_KEY="live_vwJjHRt3ZyNi4ifGrS8z9rUKjyxY0NnPFfk64BGofKKc7b4leZyJaGG8eJcgeDZy"
+      - CAT_API_KEY="<SUA_API_KEY_AQUI>"
     restart: unless-stopped
     networks:
       - monitoring

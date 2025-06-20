@@ -1,4 +1,21 @@
-# cats-api - Case Itau
+# CAT-API - Case Itau
+
+# Sumário
+
+- [CAT-API - Case Itau](#cat-api---case-itau)
+- [Sumário](#sumário)
+- [Introduçao](#introduçao)
+- [Arquitetura](#arquitetura)
+- [Ferramentas e serviços utilizados](#ferramentas-e-serviços-utilizados)
+  - [Acessos ao serviço cat-api](#acessos-ao-serviço-cat-api)
+- [Documentaçao da API](#documentaçao-da-api)
+  - [Principais Endpoints](#principais-endpoints)
+    - [Collection para o Insomnia](#collection-para-o-insomnia)
+- [Prints dos pontos de Observabildiade](#prints-dos-pontos-de-observabildiade)
+- [Como executar no ambiente local](#como-executar-no-ambiente-local)
+- [Testes com carga](#testes-com-carga)
+  - [Normalmente o report fica em ```http://127.0.0.1:5665/```](#normalmente-o-report-fica-em-http1270015665)
+
 
 # Introduçao
 
@@ -187,11 +204,11 @@ Aqui uns prints do grafana no que tange a observabilidade(ainda que basica) da a
 
 Considerando que ja possua docker e docker-compose no seu ambiente, siga os passos
 
-1. Clone o repositorio
+1. Clone o repositorio https://github.com/juniorsalvador/cats-api
 
 2. Gere a sua API_KEY no [The Cats API](https://thecatapi.com/)
 
-3. Insira sua chave no arquivo ```docker-compose.yml``` no serviço ```cat-api```, em ```environments:```
+3. Insira sua chave no arquivo ```docker-compose.yml``` no serviço ```cat-api```, em ```environments:``` na variavel ```CAT_API_KEY```
 
 4. A partir do mesmo nivel de diretorio do ```docker-compose.yml```, execute:
 
@@ -216,8 +233,8 @@ Tudo executado com sucesso, as URL's devem ser:
 Endpoint api = ```http://localhost:8000/```
 
 Grafana = [http://localhost:3000](http://localhost:3000/)
-user=admin
-password=admin
+**user**=admin
+**password**=admin
 
 Na arvore de diretorio do ```grafana/provisioning``` há dois diretorios:
 - **dashboard/**
@@ -298,5 +315,5 @@ caso queira tambem ver um report local com um dashboard bem bacana, pode executa
 K6_WEB_DASHBOARD=true k6 run load_test.js  -o experimental-prometheus-rw
 ```
 
+Normalmente o report fica em ```http://127.0.0.1:5665/```
 ---
-
