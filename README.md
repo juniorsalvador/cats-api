@@ -174,6 +174,11 @@ Basta importar no insomnia do seu ambiente.
 
 # Prints dos pontos de Observabildiade
 
+Aqui uns prints do grafana no que tange a observabilidade(ainda que basica) da api
+
+![parte 1](gr_observabilidade1.png)
+
+![parte 2](gr_observabilidade2.png)
 
 
 ---
@@ -292,3 +297,6 @@ caso queira tambem ver um report local com um dashboard bem bacana, pode executa
 ```bash
 K6_WEB_DASHBOARD=true k6 run load_test.js  -o experimental-prometheus-rw
 ```
+
+---
+

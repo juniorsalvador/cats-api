@@ -354,7 +354,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -437,13 +438,58 @@
             "uid": "fepfy46qcjzswb"
           },
           "direction": "backward",
-          "editorMode": "code",
-          "expr": "{job=\"cat-api\"}",
+          "editorMode": "builder",
+          "expr": "{job=\"cat-api\", endpoint!~\"/|/metrics|/metrics/|/health|/docs|/favicon\\\\.ico|/openapi\\\\.json|/redocs\"}",
           "queryType": "range",
           "refId": "A"
         }
       ],
       "title": "API Logs",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "fepfy46qcjzswb"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 13,
+      "options": {
+        "dedupStrategy": "exact",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "fepfy46qcjzswb"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"cat-api\", endpoint!~\"/breeds/:breeds_id|/metrics|/metrics/|/favicon\\\\.ico|/docs|/openapi\\\\.json|/redocs\"} | status != `200` | level != `INFO`",
+          "legendFormat": "{{endpoint}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "API Logs - Requisições com erro",
       "type": "logs"
     },
     {
@@ -509,7 +555,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 33
+        "y": 40
       },
       "id": 5,
       "interval": "5s",
@@ -612,7 +658,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 33
+        "y": 40
       },
       "id": 6,
       "interval": "5s",
@@ -676,7 +722,7 @@
         "h": 7,
         "w": 5,
         "x": 0,
-        "y": 40
+        "y": 47
       },
       "id": 10,
       "interval": "5s",
@@ -722,81 +768,6 @@
         }
       ],
       "title": "Cat Api - % Severidades",
-      "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "fepfy46qcjzswb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": []
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 5,
-        "y": 40
-      },
-      "id": 11,
-      "interval": "5s",
-      "options": {
-        "displayLabels": [
-          "name",
-          "percent"
-        ],
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "values": [
-            "percent"
-          ]
-        },
-        "pieType": "pie",
-        "reduceOptions": {
-          "calcs": [
-            "count"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "fepfy46qcjzswb"
-          },
-          "direction": "backward",
-          "editorMode": "builder",
-          "expr": "sum by(status) (count_over_time({job=\"cat-api\", endpoint!~\"/breeds/:breeds_id|/metrics|/metrics/|/favicon\\\\.ico|/docs|/openapi\\\\.json|/redocs\"} | json | status != `` [1h]))",
-          "hide": false,
-          "legendFormat": "{{status}}",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Cat Api - % Status Code",
       "type": "piechart"
     },
     {
@@ -897,9 +868,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 14,
-        "x": 10,
-        "y": 40
+        "w": 19,
+        "x": 5,
+        "y": 47
       },
       "id": 12,
       "interval": "1m",
@@ -1001,12 +972,12 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-20m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Cat API Monitoring",
   "uid": "a247a413-75f2-4c9d-9997-7ab80077bc2a",
-  "version": 24
+  "version": 27
 }

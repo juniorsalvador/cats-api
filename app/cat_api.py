@@ -196,7 +196,8 @@ async def list_all_breeds(request: Request):
     """
     logger.info("Fetching all breeds", extra={
         'endpoint': request.url.path,
-        'method': request.method
+        'method': request.method,
+        'status': 200
     })
     
     db = CatDatabase()
@@ -225,7 +226,8 @@ async def get_breed_info(breed_id: str, request: Request):
     """
     logger.info(f"Fetching breed {breed_id}", extra={
         'endpoint': request.url.path,
-        'method': request.method
+        'method': request.method,
+        'status': 200
     })
     
     db = CatDatabase()
@@ -263,7 +265,8 @@ async def get_breeds_by_temperament(temperament: str, request: Request):
 
     logger.info(f"Fetching temperament {temperament}", extra={
         'endpoint': request.url.path,
-        'method': request.method
+        'method': request.method,
+        'status': 200
     })
 
     db = CatDatabase()
@@ -300,7 +303,8 @@ async def get_breeds_by_origin(origin: str, request: Request):
 
     logger.info(f"Fetching breeds by origin {origin}", extra={
         'endpoint': request.url.path,
-        'method': request.method
+        'method': request.method,
+        'status': 200
     })
 
     db = CatDatabase()
