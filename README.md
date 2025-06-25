@@ -272,7 +272,7 @@ export const options = {
 ```
 
 > **ℹ️ Info:** 
-> Dependendo do cenario que a API foi feito o deploy, pode haver uma contançao das requesiçoes, logo não ajuda muito aumentar os valores dos parametros. Nesse caso, eu obtive status 429 do prometheus(modo remote-write) que estou usando no grafana cloud, em alguns momentos no teste eu atingi o rate limit dessa minha conta que é free.
+> Dependendo do cenario que a API foi feito o deploy, pode haver uma contençao das requesiçoes, logo não ajuda muito aumentar os valores dos parametros. Nesse caso, eu obtive status 429 do prometheus(modo remote-write) que estou usando no grafana cloud, em alguns momentos no teste eu atingi o rate limit dessa minha conta que é free.
 
 
 O componente responsavel pela sua execução é o Grafana K6.
@@ -307,7 +307,7 @@ A partir do diretorio ```tests```, execute:
 k6 run load_test.js  -o experimental-prometheus-rw
 ```
 
-caso queira tambem ver um report local com um dashboard bem bacana, pode executar dessa forma abaixo, passando ```K6_WEB_DASHBOARD=true``` que ele vai jogar no saida do comando a URL local para acessa-lo.
+Caso queira tambem ver um report local com um dashboard bem bacana, pode executar dessa forma abaixo, passando ```K6_WEB_DASHBOARD=true``` que ele vai jogar no saida do comando a URL local para acessa-lo.
 
 ```bash
 K6_WEB_DASHBOARD=true k6 run load_test.js  -o experimental-prometheus-rw
